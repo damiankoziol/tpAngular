@@ -1,0 +1,52 @@
+<div class="container mt-4" >
+    <h2 class="text-primary mb-4">Cursos</h2>
+    <p class="mb-4">Número de cursos existentes: {{ cursos.length }}</p>
+
+    <div class="mb-3">
+        <button (click)="agregarCurso()" class="btn btn-success">Añadir Nuevo Curso</button>
+        <button (click)="eliminarCurso(cursos.length-1)" class="btn btn-danger">Eliminar</button>
+        <button (click)="toggleMostrarCursos()" class="btn btn-secondary">
+            {{ mostrarCursos ? 'Ocultar Cursos' : 'Mostrar Cursos' }}
+        </button>
+    </div>
+
+    <div *ngIf="mostrarCursos" class="row">
+        <div *ngFor="let curso of cursos; let i = index" class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ curso.nombre }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Duración: {{ curso.duracion }}</h6>
+                    <p class="card-text">{{ curso.descripcion }}</p>
+                    <button (click)="eliminarCurso(i)" class="btn btn-danger">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <h2 class="text-primary mt-4 ">Añadir Nuevo Curso</h2>
+    <!-- Formulario nuevo curso -->
+    <form (submit)="agregarCurso()" class="mb-4 ">
+        <div class="form-group">
+            <label for="nombreCurso">Nombre del Curso</label>
+            <input type="text" class="form-control" id="nombreCurso" [(ngModel)]="nuevoCurso.nombre" name="nombre"
+                placeholder="Ej. Curso de Programación">
+        </div>
+        <div class="form-group">
+            <label for="duracionCurso">Duración</label>
+            <input type="text" class="form-control" id="duracionCurso" [(ngModel)]="nuevoCurso.duracion" name="duracion"
+                placeholder="Ej. 3 meses">
+        </div>
+        <div class="form-group">
+            <label for="descripcionCurso">Descripción</label>
+            <textarea class="form-control" id="descripcionCurso" [(ngModel)]="nuevoCurso.descripcion" name="descripcion"
+                placeholder="Ej. Un curso intensivo de programación web."></textarea>
+        </div>
+        <div class="form-group">
+            <label for="cantidadCurso">Cantidad de Estudiantes</label>
+            <input type="number" class="form-control" id="cantidadCurso" [(ngModel)]="nuevoCurso.cantidad"
+                name="cantidad" placeholder="Ej. 25">
+        </div>
+        <button type="submit" class="btn btn-primary">Añadir Curso</button>
+    </form>
+</div>
